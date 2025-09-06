@@ -1,0 +1,54 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.hero-container{
+    /* background-color: #EDE4E0; */
+    background: linear-gradient(to right, #FDF8F8, #EDE4E0, #D9C9C3); 
+}
+.opportunity{
+    color: #C3444B ;
+}
+.hero-title{
+    font-size: 60px !important;
+    display: inline;
+    margin-top: 0%;
+    padding-top: 0%;
+}
+.BrowseJobsbtn{
+    background-color: #C3444B;
+}
+img{
+    border-radius: 0% 100% 0% 100% / 35% 1% 99% 65% ;
+}
+.hero-img{
+    /* border-radius: 100% 0% 76% 24% / 40% 97% 3% 60%  ; */
+    /* height: 500px; */
+    margin-right: 0%;
+    padding: 0%;
+    padding-bottom: 0%;
+}
+.logo{
+    width: 200px;
+    height: 150px;
+    margin:0;
+    padding:0%;
+    display: flex;
+    align-items: start;
+}
+.Choosetext{
+    font-size: 16px;
+    line-height: 2;
+    text-align: left;
+    padding: px;
+}
+.Choosetext h2{
+    font-size:22px ;
+}
+.emoji{
+    font-size: 35px;
+}
+footer{
+       background-color: moccasin;
+
+}

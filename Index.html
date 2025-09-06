@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+     <script src="https://cdn.tailwindcss.com"></script>
+     <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="text-gray-600 body-font">
+  <div class="hero-container mx-0 flex px-0 py-2 md:flex-row flex-col items-center">
+    <div class="lg:flex-grow md:w-1/2 lg:pr-16 md:pr-8 flex flex-col md:items-center md:text-center mb-16 md:mb-0 items-center text-center">
+       <img src="Images/jobConnect.png" alt="logo" class="logo sm:w-100 md:w-300">
+        <h1 class="hero-title title-font sm:text-4xl text-5xl mb-4 font-larger font-bold text-gray-900 text-center">Discover Your Next
+        <span class="opportunity"><br class="opportunity hidden lg:inline-block">Opportunity</span> 
+      </h1>
+      <p class="mb-8 leading-relaxed text-2xl">Find Work. Make Moves. Stay Connected!</p>
+      <div class="flex justify-center">
+        <button class="BrowseJobsbtn text-white  mb-4 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">Browse Jobs</button>
+        <button class="ml-4 mb-4 text-gray-700 bg-gray-100 border-1-red-300 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Post A Job</button>
+      </div>
+    </div>
+    <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mx-0 my-0">
+      <img class=" hero-img object-cover object-center rounded" alt="hero" src="Images/hero2.jpg">
+    </div>
+  </div>
+</section>
+
+
+</section>
+    <section class="modal" id="modal">
+      <div class="container mx-auto">
+        <h1>Login to View Job Listings</h1>
+        <form action="">
+          <div>
+            <label for="UserName">Username</label>
+            <input
+              type="text"
+              id="UserName"
+              placeholder="Enter your username"
+            />
+          </div>
+          <div>
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+            />
+          </div>
+          <button type="submit" class="btn" id="loginbtn">Log In</button>
+        </form>
+
+        <div class="signup">
+          <h2>New User? Sign Up</h2>
+          <button id="showSignup">Create Account</button>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="createuser" id="signupSection" style="display: none">
+      <div id="signup">
+        <h1 style="text-align: center; padding: 1rem; font-size: larger">
+          <b>Create User Account</b>
+        </h1>
+        <form action="" method="post">
+          <div>
+            <label for="fullname">Full Name</label>
+            <input
+              type="text"
+              id="fullname"
+              name="fullname"
+              placeholder="Enter full name"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="newusername">Username</label>
+            <input
+              type="text"
+              id="newusername"
+              name="username"
+              placeholder="Enter your preferred username"
+              required
+            />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              class="ml-7"
+              required
+            />
+          </div>
+          <div>
+            <label for="newpassword">Password</label>
+            <input
+              type="password"
+              id="newpassword"
+              name="password"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          <div class="signup">
+            <button
+              type="submit"
+              class="signupbtn align-center justify-center mx-auto"
+              id="signupbtn"
+            >
+              Create Account
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+
+
+<section class="text-gray-600 body-font">
+  <div class="container px- py-16 mx-auto ">
+    <div class="flex flex-col text-center w-full mb-20">
+      <h1 class="sm:text-3xl text-5xl font-large title-font mb-4 text-gray-900 font-bold">Why Choose <span class="opportunity">JobConnect?</span></h1>
+    </div>
+
+    <div class="flex justify-center gap-6 px-4 py- max-w-screen-xl mx-auto">
+
+        <div class="p-4 mx-2 w-full sm:w-1/2 lg:w-1/3 bg-gray-100 border rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+        <div class="Choosetext px-4 py-6 bg-gray- rounded-xl">
+          <h2 class="title-font text-2xl font-bold text-gray-900"> <span class="emoji">🌎</span> <br> Global Reach</h2>
+          <p class="leading-relaxed">Explore job opportunities from verified companies worldwide.</p>
+        </div>
+      </div>
+
+      <div class="p-4 mx-2 w-full sm:w-1/2 lg:w-1/3 bg-gray-100 border rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+        <div class="Choosetext px-4 py-6 bg-gray- rounded-xl">
+          <h2 class="title-font text-2xl font-bold text-gray-900"> <span class="emoji">✅</span> <br> Verified Employers</h2>
+          <p class="leading-relaxed">Every listing is screened to ensure legitimacy and trust.</p>
+        </div>
+      </div>
+
+      <div class="p-4 mx-2 w-full sm:w-1/2 lg:w-1/3 bg-gray-100 border rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+        <div class="Choosetext px-4 py-6 bg-gray- rounded-xl">
+          <h2 class="title-font text-2xl font-bold text-gray-900"> <span class="emoji">🥇</span> <br> Proven Success</h2>
+          <p class="leading-relaxed">Thousands of professionals have landed jobs through JobConnect.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="text-gray-600 body-font">
+  <div class="hero-container px-5 py-24 mx-auto">
+    <h1 class="sm:text-3xl text-6xl font-bold title-font mb-4 text-gray-900 font-bold text-center">Our Impact in Numbers</h1> <br>
+    <div class="flex flex-wrap -m-4 text-center">
+      <div class="p-4 sm:w-1/4 w-1/2">
+        <h2 class="title-font font-extrabold font-bold text-red-800 sm:text-4xl text-3xl">50K+</h2>
+        <p class="leading-relaxed">Jobs Listed</p>
+      </div>
+      <div class="p-4 sm:w-1/4 w-1/2">
+        <h2 class="title-font font-extrabold font-bold text-red-800 sm:text-4xl text-3xl">20K+</h2>
+        <p class="leading-relaxed">Employers</p>
+      </div>
+      <div class="p-4 sm:w-1/4 w-1/2">
+        <h2 class="title-font font-extrabold font-bold text-red-800 sm:text-4xl text-3xl">100K+</h2>
+        <p class="leading-relaxed">Job Seekers</p>
+      </div>
+      <div class="p-4 sm:w-1/4 w-1/2">
+        <h2 class="title-font font-extrabold font-bold text-red-800 sm:text-4xl text-3xl">95%</h2>
+        <p class="leading-relaxed">Success Rate</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-4 mx-auto">
+    <h1 class="sm:text-3xl text-5xl font-large title-font mb-4 text-gray-900 font-bold text-center">What Our Users Say</h1><br>
+    <div class="flex flex-wrap -m-4">
+      <div class="lg:w-1/3 lg:mb-0 mb-6 p-4">
+        <div class="h-full text-center">
+          <img alt="testimonial" class="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100" src="Images/eng.jpg">
+           <br><span class="">⭐⭐⭐⭐</span>
+          <p class="leading-relaxed">"JobConnect has completely changed how I look for work. I can now apply to jobs from anywhere — whether I'm at home, on the go, or even traveling. It connects me with real companies, not just random listings. I finally feel like I’m in control of my career!"</p>
+          <span class="inline-block h-1 w-10 rounded bg-red-900 mt-6 mb-4"></span>
+          <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">EMMY DOE</h2>
+          <p class="text-gray-500">Engineer</p>
+        </div>
+      </div>
+      <div class="lg:w-1/3 lg:mb-0 mb-6 p-4">
+        <div class="h-full text-center">
+          <img alt="testimonial" class="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100" src="Images/lawyer.jpg">
+          <br>
+          <span>⭐⭐⭐</span><p class="leading-relaxed"> "What I love about JobConnect is how quickly I can find qualified candidates. As soon as I post a job, I start receiving applications from professionals who match my criteria. It gives me first access to top talent before they land somewhere else."</p>
+          <br><span class="inline-block h-1 w-10 rounded bg-red-900 mt-6 mb-4"></span>
+          <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">DANIEL M.</h2>
+          <p class="text-gray-500">HR Manager, NexaTech Inc.</p>
+        </div>
+      </div>
+      <div class="lg:w-1/3 lg:mb-0 p-4">
+        <div class="h-full text-center">
+          <img alt="testimonial" class="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100" src="Images/Emmy.jpg">
+           <br><span>⭐⭐⭐⭐⭐</span>
+          <p class="leading-relaxed">"JobConnect is by far the easiest platform I've ever used to find a job. The interface is clean, everything is organized, and I didn’t feel overwhelmed like I do on other sites. Within minutes, I had my profile set up and was applying to jobs that actually matched my interests. It’s simple, smooth, and just works."</p>
+          <span class="inline-block h-1 w-10 rounded bg-red-900 mt-6 mb-4"></span>
+          <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">KATHY T.</h2>
+          <p class="text-gray-500">Senior Developer</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="text-gray-600 body-font">
+  <div class="container px-5 py-2 mx-auto flex items-center sm:flex-row flex-col">
+    <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+      <img src="Images/jobConnect.png" alt="logo" class="logo">
+
+    </a>
+    <p class="text-sm text-red-900 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2025 JobConnect —
+      <a href="https://twitter.com/knyttneve" class="text-red-900 ml-1" rel="noopener noreferrer" target="_blank">@job_connect</a>
+    </p>
+    <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+      <a class="text-red-900">
+        <svg fill="red-900" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+        </svg>
+      </a>
+      <a class="ml-3 red-900">
+        <svg fill="red-900" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+          <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+        </svg>
+      </a>
+      <a class="ml-3 text-gray-500">
+        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+        </svg>
+      </a>
+      <a class="ml-3 text-red-900">
+        <svg fill="red-900" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+          <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+          <circle cx="4" cy="4" r="2" stroke="none"></circle>
+        </svg>
+      </a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
