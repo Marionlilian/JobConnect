@@ -6,6 +6,175 @@
     <title>Homepage</title>
      <script src="https://cdn.tailwindcss.com"></script>
      <link rel="stylesheet" href="style.css">
+      <style>
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0%;
+        left: 40%;
+        justify-content: center;
+        align-items: center;
+        padding: 3rem 1rem;
+        width: 100%;
+        max-width: 450px;
+        margin: auto;
+        z-index: 50;
+      }
+
+      @media (max-width: 768px) {
+        .modal {
+          padding: 6rem 0;
+          max-width: 200rem;
+          left: 0;
+        }
+      }
+
+      .container {
+        background: #FDF8F8;
+        padding: 2rem 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+      .container button{
+      
+        background-color: #C3444B;
+        color: #fff;
+        font-weight: bold;
+        padding: 0.75rem;
+        display: inline-block;
+        width: auto;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        width: 40%;
+        margin: auto;
+        transition: background 0.3s ease, transform 0.2s;
+      }
+
+      .container button:hover {
+        background: #d77855;
+        transform: translateY(-2px);
+      }
+      
+
+      h1 {
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        color: #333;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      label {
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #444;
+      }
+
+      input {
+        padding: 1rem !important;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        outline: none;
+        font-size: 1rem;
+        transition: border 0.3s ease;
+      }
+
+      input:focus {
+        border-color: #D9C9C3;
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+      }
+
+      .btn {
+        background-color: #C3444B;
+        color: #fff;
+        font-weight: bold;
+        padding: 0.75rem;
+        display: inline-block;
+        width: auto;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s;
+      }
+
+      .btn:hover {
+        background: #d77855;
+        transform: translateY(-2px);
+      }
+
+      .signup {
+        margin-top: 0;
+        z-index: 60;
+      }
+
+      .signup h2 {
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+        color: #333;
+      }
+
+      .signup button {
+        display: flex;
+        text-decoration: none;
+        background: #C3444B;
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-weight: bold;
+        transition: background 0.3s ease, transform 0.2s;
+        margin: auto;
+      }
+
+      .signup button:hover {
+        background: #d77855;
+        transform: translateY(-2px);
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .content h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .content p {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: auto;
+      }
+      
+      .createuser {
+        display: none;
+        position: fixed;
+        top: 0%;
+        left: 40%;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        width: 100%;
+        margin: auto;
+        z-index: 50;
+        width: 500px;
+       
+      }
+    </style>
 </head>
 <body>
 
@@ -18,8 +187,8 @@
       </h1>
       <p class="mb-8 leading-relaxed text-2xl">Find Work. Make Moves. Stay Connected!</p>
       <div class="flex justify-center">
-        <button class="BrowseJobsbtn text-white  mb-4 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">Browse Jobs</button>
-        <button class="ml-4 mb-4 text-gray-700 bg-gray-100 border-1-red-300 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Post A Job</button>
+        <button id="browsebtn" class="browseBtn text-white  mb-4 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">Browse Jobs</button>
+        <button id="postJobsBtn" class="postBtn ml-4 mb-4 text-gray-700 bg-gray-100 border-1-red-300 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Post A Job</button>
       </div>
     </div>
     <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mx-0 my-0">
@@ -31,31 +200,47 @@
 
 </section>
     <section class="modal" id="modal">
-      <div class="container mx-auto">
-        <h1>Login to View Job Listings</h1>
+      <div class="container mx-auto" id="modal">
+        
+         <img
+        src="Images/jobConnect.png"
+        alt="JobConnect Logo"
+        class="mx-auto w-24 h-24 object-contain mb-4"
+      />
+
+      <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">
+        Login
+      </h2>
+
         <form action="">
           <div>
-            <label for="UserName">Username</label>
             <input
               type="text"
               id="UserName"
               placeholder="Enter your username"
+              class="mb-4 w-full px-4 py-2 border border-gray-300 rounded"
             />
           </div>
           <div>
-            <label for="password">Password</label>
             <input
               type="password"
               id="password"
               placeholder="Enter your password"
+              class="mb-4 w-full px-4 py-2 border border-gray-300 rounded"
             />
           </div>
           <button type="submit" class="btn" id="loginbtn">Log In</button>
         </form>
 
         <div class="signup">
-          <h2>New User? Sign Up</h2>
-          <button id="showSignup">Create Account</button>
+          <h2>New User? 
+          <a
+              href="#"
+              id="showSignup"
+              class="text-indigo-600 hover:underline font-medium"
+              >Sign up here</a
+            >
+          </h2>
         </div>
       </div>
     </section>
@@ -63,10 +248,19 @@
 
 
     <section class="createuser" id="signupSection" style="display: none">
-      <div id="signup">
+      <div id="signup" class="container"
+  >
+    <div class="">
+        
+        <img
+        src="Images/jobConnect.png"
+        alt="JobConnect Logo"
+        class="mx-auto w-24 h-24 object-contain mb-4"
+      />
         <h1 style="text-align: center; padding: 1rem; font-size: larger">
-          <b>Create User Account</b>
+          <b>User Registration</b>
         </h1>
+        
         <form action="" method="post">
           <div>
             <label for="fullname">Full Name</label>
@@ -116,7 +310,7 @@
               class="signupbtn align-center justify-center mx-auto"
               id="signupbtn"
             >
-              Create Account
+              Sign Up
             </button>
           </div>
         </form>
@@ -222,7 +416,7 @@
 
 
 <footer class="text-gray-600 body-font">
-  <div class="container px-5 py-2 mx-auto flex items-center sm:flex-row flex-col">
+  <div class="px-5 py-2 mx-auto flex items-center sm:flex-row flex-col">
     <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
       <img src="Images/jobConnect.png" alt="logo" class="logo">
 
@@ -256,6 +450,274 @@
     </span>
   </div>
 </footer>
+
+   
+<section id="SigninEmployer">
+  <div
+    id="employerLoginModal"
+    class="container hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div class="bg-white rounded-lg shadow-lg p-8">
+
+      <img
+        src="Images/jobConnect.png"
+        alt="JobConnect Logo"
+        class="mx-auto w-24 h-24 object-contain mb-4"
+      />
+
+      <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">
+        Employer Login
+      </h2>
+
+      <input
+        type="text"
+        id="employerLoginUser"
+        placeholder="Username"
+        class="mb-4 w-full px-4 py-2 border border-gray-300 rounded"
+      />
+      <input
+        type="password"
+        id="employerLoginPass"
+        placeholder="Password"
+        class="mb-6 w-full px-4 py-2 border border-gray-300 rounded"
+      />
+      <button
+        id="employerLoginBtn"
+        class=""
+      >
+        Log In
+      </button>
+
+     
+      <p class="mt-4 text-center text-sm text-gray-600">
+        Don’t have an account?
+        <a
+          href="#"
+          id="showEmployerSignup"
+          class="text-indigo-600 hover:underline font-medium"
+        >
+          Sign up here
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+    
+    <section id="SignupEmployer">
+      <div
+        id="employerSignupSection"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      >
+        <div class="container rounded-lg shadow-lg w-full max-w-lg p-8">
+           <img
+        src="Images/jobConnect.png"
+        alt="JobConnect Logo"
+        class="mx-auto w-24 h-24 object-contain mb-4"
+      />
+          <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">
+            Employer Registration
+          </h2>
+         
+
+          <input
+            type="text"
+            id="employerUsername"
+            placeholder="Username"
+            class="mb-4 w-full px-4 py-2 border border-gray-300 rounded focus:ring-indigo-500 focus:outline-none"
+          />
+
+          <input
+            type="password"
+            id="employerPassword"
+            placeholder="Password"
+            class="mb-4 w-full px-4 py-2 border border-gray-300 rounded focus:ring-indigo-500 focus:outline-none"
+          />
+
+          <input
+            type="text"
+            id="companyName"
+            placeholder="Company Name"
+            class="mb-4 w-full px-4 py-2 border border-gray-300 rounded focus:ring-indigo-500 focus:outline-none"
+          />
+
+          <input
+            type="text"
+            id="companyAddress"
+            placeholder="Company Address"
+            class="mb-4 w-full px-4 py-2 border border-gray-300 rounded focus:ring-indigo-500 focus:outline-none"
+          />
+
+          <input
+            type="text"
+            id="employerPosition"
+            placeholder="Your Position"
+            class="mb-4 w-full px-4 py-2 border border-gray-300 rounded focus:ring-indigo-500 focus:outline-none"
+          />
+
+          <input
+            type="email"
+            id="employerEmail"
+            placeholder="Email Address"
+            class="mb-6 w-full px-4 py-2 border border-gray-300 rounded focus:ring-indigo-500 focus:outline-none"
+          />
+
+          <button
+            id="employerSignupBtn"
+            class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition"
+          >
+            Sign Up
+          </button>
+
+          <p class="mt-4 text-center text-sm text-gray-600">
+            Already have an account?
+            <a
+              href="#"
+              id="showEmployerLogin"
+              class="text-indigo-600 hover:underline font-medium"
+              >Log in here</a
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div
+      id="overlay"
+      style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        
+        z-index: 40;
+      "
+      class="bg-black bg-opacity-50 inset-0"
+    ></div>
+    <script src="script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const postJobsBtn = document.getElementById("postJobsBtn");
+        const employerLoginModal =
+          document.getElementById("employerLoginModal");
+        const employerSignupSection = document.getElementById(
+          "employerSignupSection"
+        );
+        const overlay = document.getElementById("overlay");
+
+        if (postJobsBtn) {
+          postJobsBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            employerLoginModal.classList.remove("hidden");
+            overlay.style.display = "block"; 
+          });
+        }
+        if (overlay) {
+          overlay.addEventListener("click", () => {
+            employerLoginModal.classList.add("hidden");
+            employerSignupSection.classList.add("hidden");
+            overlay.style.display = "none";
+          });
+        }
+        window.addEventListener("click", (event) => {
+          if (event.target === employerLoginModal) {
+            employerLoginModal.classList.add("hidden");
+            overlay.style.display = "none";
+          }
+          if (event.target === employerSignupSection) {
+            employerSignupSection.classList.add("hidden");
+            overlay.style.display = "none";
+          }
+        });
+        document
+          .getElementById("employerSignupBtn")
+          ?.addEventListener("click", () => {
+            const username = document
+              .getElementById("employerUsername")
+              .value.trim();
+            const password = document.getElementById("employerPassword").value;
+            const companyName = document
+              .getElementById("companyName")
+              .value.trim();
+            const companyAddress = document
+              .getElementById("companyAddress")
+              .value.trim();
+            const position = document
+              .getElementById("employerPosition")
+              .value.trim();
+            const email = document.getElementById("employerEmail").value.trim();
+
+            if (
+              !username ||
+              !password ||
+              !companyName ||
+              !companyAddress ||
+              !position ||
+              !email
+            ) {
+              alert("Please fill in all fields.");
+              return;
+            }
+
+            localStorage.setItem("employer_username", username);
+            localStorage.setItem("employer_password", password);
+            localStorage.setItem(
+              "employer_profile",
+              JSON.stringify({
+                companyName,
+                companyAddress,
+                position,
+                email,
+              })
+            );
+
+            alert("Registration successful! You can now log in.");
+            employerSignupSection.classList.add("hidden");
+            employerLoginModal.classList.remove("hidden");
+          });
+          if (overlay) {
+          overlay.addEventListener("click", () => {
+            employerSignupSection.classList.add("hidden");
+            employerSignupSection.classList.add("hidden");
+            overlay.style.display = "none";
+          });
+        }
+
+        document
+          .getElementById("employerLoginBtn")
+          ?.addEventListener("click", () => {
+            const username = document
+              .getElementById("employerLoginUser")
+              .value.trim();
+            const password = document.getElementById("employerLoginPass").value;
+
+            const storedUsername = localStorage.getItem("employer_username");
+            const storedPassword = localStorage.getItem("employer_password");
+
+            if (username === storedUsername && password === storedPassword) {
+              alert(`Welcome back, ${storedUsername}!`);
+              window.location.href = "EmployerDashboard.html";
+            } else {
+              alert("Invalid login credentials.");
+            }
+          });
+        document
+          .getElementById("showEmployerSignup")
+          ?.addEventListener("click", (e) => {
+            e.preventDefault();
+            employerLoginModal.classList.add("hidden");
+            employerSignupSection.classList.remove("hidden");
+          });
+        document
+          .getElementById("showEmployerLogin")
+          ?.addEventListener("click", (e) => {
+            e.preventDefault();
+            employerSignupSection.classList.add("hidden");
+            employerLoginModal.classList.remove("hidden");
+          });
+      });
+    </script>
+
 
 </body>
 </html>

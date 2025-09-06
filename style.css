@@ -15,7 +15,7 @@ body{
     margin-top: 0%;
     padding-top: 0%;
 }
-.BrowseJobsbtn{
+.browseBtn {
     background-color: #C3444B;
 }
 img{
@@ -52,3 +52,36 @@ footer{
        background-color: moccasin;
 
 }
+    #search{
+      padding: 2rem;
+      margin: auto;
+      font-size: 28px;
+      display: flex;
+      /* color: blue; */
+    }
+    button{
+      background-color: gray;
+      padding: 0.25rem;
+
+    }
+    button:hover{
+      background-color: grey;
+      border: 1px solid black;
+      color: white;
+    }
+    #viewed-jobs{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      padding: 1rem;
+      margin: 1%;
+      justify-content: center;
+      align-items: center;
+    }
+    
+      header{
+         background-color: #e7c7bc;
+         color: #C3444B;
+      }
+    
+

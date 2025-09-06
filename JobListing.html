@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobListings</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+     a.active {
+      color: lightblue;
+      font-weight: bold;
+      text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+   <header class="shadow-lg">
+  <div class="container mx-auto flex flex-wrap items-center justify-between px-5 py-4">
+
+    <a href="index.html" class="flex items-center space-x-2">
+      <img
+        src="Images/jobConnect.png"
+        alt="JobConnect Logo"
+        class="w-20 h-20 object-contain"
+        style="z-index: 60;"
+      />
+    </a>
+    <nav class="flex items-center gap-x-6 text-base text-gray-800">
+      <a href="index.html" class="nav-link :text-red-600 transition">Home</a>
+      <a href="Dashboard.html" class="nav-link hover:text-red-600 transition">Dashboard</a>
+      <a href="JobListing.html" class="nav-link hover:text-red-600 transition">Job Listings</a>
+      
+    </nav>
+    <button
+      id="logoutBtn"
+      class="bg-red-800 text-white font-medium py-2 px-4 rounded border border-red-300 hover:bg-white hover:text-red-800 transition-colors duration-200"
+    >
+      Log Out
+    </button>
+
+  </div>
+</header>
+
+
+    <div>
+   <div>
+    <form id="search" class="p-3 flex flex-wrap gap-2 items-center bg-white rounded shadow-md text-sm">
+  <label for="searchby" class="text-gray-700 font-medium text-base">Search jobs by:</label>
+
+  <select
+    id="searchby"
+    class="p-3 border border-gray-300 rounded focus:ring-1 focus:ring-red-800 focus:outline-none text-sm text-black"
+  >
+    <option value="title">Job Title</option>
+    <option value="location">Location</option>
+    <option value="category">Category</option>
+  </select>
+
+  <input
+    type="text"
+    id="searchQuery"
+    placeholder="Enter keyword..."
+    class="p-3 border border-gray-300 rounded w-50 focus:ring-1 focus:ring-red-900 focus:outline-none text-base"
+  />
+
+  <button
+    type="submit"
+    class="bg-red-900 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors duration-200 text-base"
+  >
+    Search
+  </button>
+</form>
+   </div>
+
+
+      <div id="jobs" class="mt-6 grid grid-cols-3 gap-4 p-2"></div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const currentPath = window.location.pathname.split('/').pop();
+
+    navLinks.forEach(link => {
+      const linkPath = link.getAttribute('href');
+      if (linkPath === currentPath) {
+        link.classList.add('font-bold', 'text-red-900', 'border-b-2', 'border-red-900');
+      }
+    });
+  });
+</script>
+
+   
+  </body>
+</html>
