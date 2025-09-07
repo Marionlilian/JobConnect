@@ -62,6 +62,36 @@
       }
     });
   });
+
+//   document.addEventListener('DOMContentLoaded', () => {
+//   const currentUser = localStorage.getItem('activeUser')?.toLowerCase();
+//   const allViewedJobs = JSON.parse(localStorage.getItem('viewedJobs')) || {};
+//   const userJobs = allViewedJobs[currentUser] || [];
+
+//   const container = document.getElementById('viewed-jobs');
+//   if (!container) return;
+
+//   container.innerHTML = userJobs.length === 0
+//     ? '<p>No viewed jobs yet.</p>'
+//     : '';
+
+//   userJobs.forEach(job => {
+//     const card = document.createElement('div');
+//     card.className = 'bg-[#FDF8F8] p-4 rounded mb-3 shadow';
+
+//     card.innerHTML = `
+//       <h3 class="text-lg font-semibold">${job.title}</h3>
+//       <p class="text-sm text-gray-600">${job.company}</p>
+//       <p class="text-sm">${job.location}</p>
+//       <a href="${job.url}" target="_blank" class="inline-block mt-2 px-4 py-2 text-white bg-gray-700 rounded hover:bg-gray-200 hover:text-red-900">
+//         View Job
+//       </a>
+//     `;
+
+//     container.appendChild(card);
+//   });
+// });
+
   
 </script>
 </body>

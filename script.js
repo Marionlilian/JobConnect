@@ -36,8 +36,6 @@ class JobListing {
 
     this.addEventListeners();
 
-    // localStorage.setItem('username', 'admin');
-    // localStorage.setItem('password', '1234');
   }
 
   addEventListeners() {
@@ -233,7 +231,6 @@ if (overlay) {
       email
     }));
 
-    // alert('Registration successful! You can now log in.');
     this.employerSignupSection?.classList.add("hidden");
     this.employerLoginModal?.classList.remove("hidden");
   }
@@ -253,80 +250,121 @@ if (overlay) {
     }
   }
 
-  postJob(event) {
-    event.preventDefault();
+ postJob(event) {
+  event.preventDefault();
 
-    const job = {
-      title: document.getElementById('jobTitle').value,
-      location: document.getElementById('location').value,
-      description: document.getElementById('jobDescription')?.value || "No description provided",
-      redirect_url: document.getElementById('redirectUrl').value,
-      company: localStorage.getItem('activeEmployer') || "Unknown Company"
-    };
-
-    const jobs = JSON.parse(localStorage.getItem('postedJobs')) || [];
-    jobs.unshift(job); 
-    localStorage.setItem('postedJobs', JSON.stringify(jobs));
-
-    alert('Job posted successfully!');
-    document.getElementById('jobForm')?.reset();
+  const activeEmployer = localStorage.getItem('activeEmployer');
+  if (!activeEmployer) {
+    alert("You must be logged in as an employer to post a job.");
+    return;
   }
+
+  const profile = JSON.parse(localStorage.getItem(`employer_profile_${activeEmployer}`));
+  const companyName = profile?.companyName || "Unknown Company";
+  const companyAddress = profile?.companyAddress || "Unknown Location";
+
+  const job = {
+    title: document.getElementById('jobTitle').value,
+    location: companyAddress,
+    description: document.getElementById('jobDescription')?.value || "No description provided",
+    redirect_url: document.getElementById('redirectUrl').value,
+    company: companyName
+  };
+
+  const jobs = JSON.parse(localStorage.getItem('postedJobs')) || [];
+  jobs.unshift(job);
+  localStorage.setItem('postedJobs', JSON.stringify(jobs));
+
+  alert('Job posted successfully!');
+  document.getElementById('jobForm')?.reset();
+}
+
 
   async fetchJobs() {
+  
     const apiJobs = [];
-    try {
-      const res = await fetch(`https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=54aa27d4&app_key=9889b9d4c1512fac9bfaeeab5c9dc4fc&results_per_page=20&what=remote`);
-      const data = await res.json();
-      apiJobs.push(...(data.results || []));
-    } catch (error) {
-      console.error("API error:", error);
-    }
-
-    const customJobs = JSON.parse(localStorage.getItem('postedJobs')) || [];
-
-    const allJobs = [...customJobs, ...apiJobs];
-    this.allJobs = [...customJobs, ...apiJobs];
-
-
-    if (this.jobsElement) {
-      this.jobsElement.innerHTML = '';
-
-      if (allJobs.length === 0) {
-        this.jobsElement.innerHTML = '<p>No jobs found.</p>';
-        return;
-      }
-
-      allJobs.forEach(job => {
-        const jobCard = document.createElement('div');
-        jobCard.className = 'job-card bg-[#FDF8F8] p-4 rounded shadow mb-4';
-        jobCard.innerHTML = `
-          <h3 class="text-lg font-semibold">${job.title}</h3>
-          <p class="text-sm text-gray-600">${job.company?.display_name || 'Unknown Company'}</p>
-          <p class="text-sm">${job.location?.display_name || 'Unknown Location'}</p>
-
-        `;
-
-        const viewBtn = document.createElement('button');
-        viewBtn.className = "mt-4 bg-gray-700 hover:bg-gray-200 text-white hover:text-red-900 font-semibold py-2 px-4 rounded";
-        viewBtn.textContent = 'View Job';
-        viewBtn.addEventListener('click', () => this.saveViewedJobs(job));
-        jobCard.appendChild(viewBtn);
-
-        this.jobsElement.appendChild(jobCard);
-      });
-    }
+  try {
+    const res = await fetch(`https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=54aa27d4&app_key=9889b9d4c1512fac9bfaeeab5c9dc4fc&results_per_page=20&what=remote`);
+    const data = await res.json();
+    apiJobs.push(...(data.results || []));
+  } catch (error) {
+    console.error("API error:", error);
   }
 
-  saveViewedJobs(job) {
+  const customJobs = JSON.parse(localStorage.getItem('postedJobs')) || [];
+  this.allJobs = [...customJobs, ...apiJobs]; 
+
+  this.displayJobs(this.allJobs); 
+}
+
+displayJobs(jobs) {
+  if (!this.jobsElement) return;
+  this.jobsElement.innerHTML = '';
+
+  if (jobs.length === 0) {
+    this.jobsElement.innerHTML = '<p>No jobs found.</p>';
+    return;
+  }
+
+  jobs.forEach(job => {
+    const jobCard = document.createElement('div');
+    jobCard.className = 'job-card bg-[#FDF8F8] p-4 rounded shadow mb-4';
+
+    const companyName = job.company?.display_name || job.company || 'Unknown Company';
+    const locationName = job.location?.display_name || job.location || 'Unknown Location';
+
+    jobCard.innerHTML = `
+      <h3 class="text-lg font-semibold">${job.title}</h3>
+      <p class="text-sm text-gray-600">${companyName}</p>
+      <p class="text-sm">${locationName}</p>
+    `;
+
+    const viewBtn = document.createElement('button');
+    viewBtn.className = "mt-4 bg-gray-700 hover:bg-gray-200 text-white hover:text-red-900 font-semibold py-2 px-4 rounded";
+    viewBtn.textContent = 'View Job';
+    viewBtn.addEventListener('click', () => this.saveViewedJobs(job));
+    jobCard.appendChild(viewBtn);
+
+    this.jobsElement.appendChild(jobCard);
+  });
+}
+
+
+filterJobs() {
+  const query = this.searchQuery.value.trim().toLowerCase();
+
+  if (!query) {
+    this.displayJobs(this.allJobs); 
+    return;
+  }
+
+
+  const filtered = this.allJobs.filter(job => {
+    const title = job.title?.toLowerCase() || '';
+    return title.includes(query);
+  });
+
+  console.log("Filtered Jobs:", filtered);
+  this.displayJobs(filtered);
+}
+
+
+ saveViewedJobs(job) {
+    const currentUser = localStorage.getItem('activeUser')
     const viewedJobs = JSON.parse(localStorage.getItem('viewedJobs')) || [];
     const alreadyViewed = viewedJobs.find(j => j.title === job.title && j.company === job.company);
+
+    if (!viewedJobs[currentUser]) {
+    viewedJobs[currentUser] = [];
+  }
 
     if (!alreadyViewed) {
       viewedJobs.push({
         title: job.title,
         company: job.company,
         location: job.location,
-        url: job.redirect_url
+        url: job.redirect_url,
+        user: currentUser
       });
       localStorage.setItem('viewedJobs', JSON.stringify(viewedJobs));
     }
@@ -334,8 +372,13 @@ if (overlay) {
     window.open(job.redirect_url, '_blank');
   }
 
+
   displayViewedJobs() {
-    const jobs = JSON.parse(localStorage.getItem('viewedJobs')) || [];
+    
+    const user = localStorage.getItem('activeUser');
+    const allJobs = JSON.parse(localStorage.getItem('viewedJobs')) || [];
+    const jobs = allJobs.filter(job => job.user === user);
+
     const container = document.getElementById('viewed-jobs');
     if (!container) return;
 
@@ -352,45 +395,17 @@ if (overlay) {
       `;
       container.appendChild(card);
     });
-  }2
-  filterJobs() {
-  const filterType = document.getElementById('searchby').value;
-  const query = document.getElementById('searchQuery').value.trim().toLowerCase();
-
-  const filtered = this.allJobs.filter(job => {
-    let field = '';
-
-    if (filterType === 'title') {
-      field = job.title || '';
-    } else if (filterType === 'location') {
-      field = job.location?.display_name || '';
-    } else if (filterType === 'category') {
-    
-      field = job.category?.label || job.description || '';
-    }
-
-    return field.toLowerCase().includes(query);
-  });
-
-  this.displayJobs(filtered);
-}
-
+  }
 
 }
-
 document.addEventListener("DOMContentLoaded", () => {
   const jobListing = new JobListing();
   jobListing.init();
-
-  if (document.getElementById('jobs')) {
-    jobListing.init();
-  }
 
   if (document.getElementById('viewed-jobs')) {
     jobListing.displayViewedJobs();
   }
 
- 
   if (document.getElementById("employerName")) {
     const employer = localStorage.getItem('activeEmployer');
     if (employer) {
@@ -404,18 +419,18 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = 'index.html';
       });
     }
-    const searchForm = document.getElementById('search');
-if (searchForm) {
-  searchForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    jobListing.filterJobs();
-  });
-}
-
 
     const jobForm = document.getElementById('jobForm');
     if (jobForm) {
       jobForm.addEventListener('submit', (e) => jobListing.postJob(e));
     }
+  }
+
+  const searchForm = document.getElementById('search');
+  if (searchForm) {
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault(); 
+      jobListing.filterJobs();
+    });
   }
 });
