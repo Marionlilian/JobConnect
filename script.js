@@ -147,11 +147,19 @@ if (overlay) {
   }
   }
 
-  signUp(event) {
+ signUp(event) {
   event.preventDefault();
-  const newUsername = document.getElementById('newusername').value.trim();
-  const newPassword = document.getElementById('newpassword').value;
 
+  const newUsername = document.getElementById('newusername').value.trim();
+  const newPassword = document.getElementById('newpassword').value.trim();
+
+  
+  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d\W]).{6}$/.test(newPassword)) {
+    alert("Password must be exactly 6 characters and include uppercase, lowercase, and a number or special character.");
+    return; 
+  }
+
+ 
   if (!newUsername || !newPassword) {
     alert('Please enter all fields.');
     return;
@@ -162,7 +170,6 @@ if (overlay) {
   if (users[newUsername]) {
     alert('You already have an account.');
   } else {
-    
     users[newUsername] = newPassword;
     localStorage.setItem('users', JSON.stringify(users));
 
@@ -171,6 +178,7 @@ if (overlay) {
     this.modal.style.display = 'block';
   }
 }
+
 
 
    toggleSignup() {
@@ -218,6 +226,12 @@ if (overlay) {
     const position = document.getElementById('employerPosition').value;
     const email = document.getElementById('employerEmail').value;
 
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d\W]).{6}$/.test(password)) {
+    alert("Password must be exactly 6 characters and include uppercase, lowercase, and a number or special character.");
+    return; 
+  }
+
+    
     if (!username || !password || !companyName || !companyAddress || !position || !email) {
       alert('Please fill out all fields.');
       return;

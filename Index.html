@@ -228,6 +228,7 @@
               placeholder="Enter your password"
               class="mb-4 w-full px-4 py-2 border border-gray-300 rounded"
             />
+            
           </div>
           <button type="submit" class="btn" id="loginbtn">Log In</button>
         </form>
@@ -303,6 +304,12 @@
               placeholder="Enter your password"
               required
             />
+           <br>
+           <label>
+          <input type="checkbox" id="togglePassword" /> Show Password
+          </label>
+            
+            
           </div>
           <div class="signup">
             <button
@@ -481,6 +488,7 @@
         placeholder="Password"
         class="mb-6 w-full px-4 py-2 border border-gray-300 rounded"
       />
+           
       <button
         id="employerLoginBtn"
         class=""
@@ -526,12 +534,14 @@
             class="mb-4 w-full px-4 py-2 border border-gray-300 rounded focus:ring-indigo-500 focus:outline-none"
           />
 
-          <input
+          
+            <input
             type="password"
             id="employerPassword"
             placeholder="Password"
             class="mb-4 w-full px-4 py-2 border border-gray-300 rounded focus:ring-indigo-500 focus:outline-none"
           />
+            
 
           <input
             type="text"
@@ -594,6 +604,12 @@
     ></div>
     <script src="script.js"></script>
     <script>
+       document.getElementById('togglePassword').addEventListener('change', function () {
+       const passwordInput = document.getElementById('newpassword');
+       passwordInput.type = this.checked ? 'text' : 'password';
+      });
+
+      
       document.addEventListener("DOMContentLoaded", () => {
         const postJobsBtn = document.getElementById("postJobsBtn");
         const employerLoginModal =
@@ -669,9 +685,9 @@
               })
             );
 
-            alert("Registration successful! You can now log in.");
-            employerSignupSection.classList.add("hidden");
-            employerLoginModal.classList.remove("hidden");
+            // alert("Registration successful! You can now log in.");
+            // employerSignupSection.classList.add("hidden");
+            // employerLoginModal.classList.remove("hidden");
           });
           if (overlay) {
           overlay.addEventListener("click", () => {
@@ -693,10 +709,10 @@
             const storedPassword = localStorage.getItem("employer_password");
 
             if (username === storedUsername && password === storedPassword) {
-              alert(`Welcome back, ${storedUsername}!`);
+              // alert(`Welcome back, ${storedUsername}!`);
               window.location.href = "EmployerDashboard.html";
             } else {
-              alert("Invalid login credentials.");
+              // alert("Invalid login credentials.");
             }
           });
         document
